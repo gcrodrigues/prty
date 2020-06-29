@@ -1,7 +1,6 @@
 import React, { useContext } from "react";
 import { FaBars } from "react-icons/fa";
 import cn from "classnames";
-import { Link } from "react-router-dom";
 
 import { SignButtons } from "../../components";
 import AuthContext from "../../contexts/auth";
