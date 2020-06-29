@@ -2,7 +2,7 @@
   height: 100%;
   display: grid;
   grid-template-columns: 270px repeat(4, 1fr);
-  grid-template-rows: 60px repeat(4, 1fr);
+  grid-template-rows: 60px calc(100vh - 60px);
   grid-template-areas:
     "drawer navbar navbar navbar navbar"
     "drawer main main main main"
