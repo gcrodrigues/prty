@@ -1,0 +1,105 @@
+.header {
+  position: fixed;
+  width: 100%;
+  z-index: 2;
+}
+
+.headerContent {
+  padding: 25px 0px;
+  width: 80%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.main {
+  position: relative;
+}
+
+.layer {
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.7);
+  width: 100%;
+  height: 100%;
+}
+
+.home {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  height: 100vh;
+  background-image: url(../../assets/homebg.jpg);
+  background-size: cover;
+  background-position: center;
+  padding: 40px;
+}
+.homeContent {
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 85%;
+  max-width: 1150px;
+}
+
+.homeContent div {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  width: 80%;
+}
+
+.homeContent a {
+  text-align: center;
+  margin-top: 15px;
+}
+
+.btnEvents {
+  text-decoration: none;
+  color: white;
+  font-weight: 500;
+  font-size: 1.1rem;
+  background-color: #b32884;
+  padding: 10px 15px;
+  border-radius: 5px;
+  transition: all 0.15s linear;
+}
+
+.btnEvents:hover,
+.btnEvents:focus {
+  filter: brightness(92%);
+}
+
+.title {
+  font-size: 3rem;
+  font-family: "Dosis", Arial, Helvetica, sans-serif;
+  text-align: center;
+}
+
+.title span {
+  color: rgb(230, 43, 167);
+}
+
+@media (max-width: 700px) {
+  .headerContent {
+    justify-content: center;
+  }
+
+  .homeContent {
+    width: 100%;
+  }
+
+  .title {
+    font-size: 1.7rem;
+  }
+}
+
+/* @media (min-width: 1400px) {
+  .title {
+    font-size: 3.5rem;
+  }
+}
+ */
