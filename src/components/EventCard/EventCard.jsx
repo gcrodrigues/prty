@@ -1,9 +1,18 @@
 import React from "react";
-import { FaRegTrashAlt, FaRegEdit, FaRegStar } from "react-icons/fa";
+import { FaRegStar } from "react-icons/fa";
+import { FiMoreHorizontal } from "react-icons/fi";
 
 import styles from "./EventCard.module.css";
 
-const EventCard = ({ title, address, date, isFavorite, isOffline }) => {
+const EventCard = ({
+  pos,
+  title,
+  address,
+  date,
+  isFavorite,
+  handleOpenModal,
+  isOffline,
+}) => {
   return (
     <div className={styles.card}>
       <div>
@@ -15,11 +24,11 @@ const EventCard = ({ title, address, date, isFavorite, isOffline }) => {
           </button>
         ) : (
           <>
-            <button>
-              <FaRegEdit size={22} color="#fff" />
-            </button>
-            <button>
-              <FaRegTrashAlt size={22} color="#fff" />
+            <button
+              className={styles.moreInfo}
+              onClick={() => handleOpenModal(pos)}
+            >
+              <FiMoreHorizontal size={20} color="#fff" />
             </button>
           </>
         )}
