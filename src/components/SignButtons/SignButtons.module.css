@@ -37,3 +37,9 @@
     font-size: 1rem;
   }
 }
+
+@media (max-width: 700px) {
+  .signup {
+    margin-left: 0 !important;
+  }
+}
