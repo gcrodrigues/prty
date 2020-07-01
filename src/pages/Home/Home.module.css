@@ -29,7 +29,7 @@
   align-items: center;
   justify-content: center;
   flex-direction: column;
-
+  min-height: 600px;
   height: 100vh;
   background-image: url(../../assets/homebg.jpg);
   background-size: cover;

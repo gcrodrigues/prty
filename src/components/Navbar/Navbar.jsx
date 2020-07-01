@@ -1,13 +1,17 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { FaBars } from "react-icons/fa";
 import cn from "classnames";
 
 import { SignButtons } from "../../components";
-import AuthContext from "../../contexts/auth";
+import LayoutContext from "../../contexts/layout";
 import styles from "./Navbar.module.css";
 
 const Navbar = ({ logo }) => {
-  const { isOpen } = useContext(AuthContext);
+  const { isOpen, width, resizeWidth } = useContext(LayoutContext);
+
+  useEffect(() => {
+    window.addEventListener("resize", resizeWidth);
+  });
 
   return (
     <div
@@ -18,9 +22,8 @@ const Navbar = ({ logo }) => {
       }
     >
       {logo && <img src={logo} alt="logo" />}
-      {logo ? (
-        <SignButtons />
-      ) : (
+      {logo && width > 700 && <SignButtons />}
+      {!logo && (
         <>
           <FaBars onClick={isOpen} size={22} color="#fff" />
           <p>Olá, Gustavo</p>

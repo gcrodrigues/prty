@@ -1,13 +1,13 @@
 import React, { useEffect, useContext } from "react";
 import cn from "classnames";
-import AuthContext from "../../contexts/auth";
+import LayoutContext from "../../contexts/layout";
 
 import { SignForm } from "../../components";
 import styles from "./Signup.module.css";
 import logo from "../../assets/logo.png";
 
 const Signup = () => {
-  const { width, resizeWidth } = useContext(AuthContext);
+  const { width, resizeWidth } = useContext(LayoutContext);
 
   useEffect(() => {
     window.addEventListener("resize", resizeWidth);

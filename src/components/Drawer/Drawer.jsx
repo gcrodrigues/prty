@@ -8,14 +8,14 @@ import {
   FaStar,
 } from "react-icons/fa";
 import { NavLink } from "react-router-dom";
-import AuthContext from "../../contexts/auth";
+import LayoutContext from "../../contexts/layout";
 
 import cn from "classnames";
 import styles from "./Drawer.module.css";
 import logo from "../../assets/logo.png";
 
 const Drawer = () => {
-  const { open, isOpen } = useContext(AuthContext);
+  const { open, isOpen } = useContext(LayoutContext);
 
   return (
     <div

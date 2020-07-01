@@ -1,18 +1,17 @@
 import React, { useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
-import AuthContext from "../../contexts/auth";
+import LayoutContext from "../../contexts/layout";
 
 import { SignButtons } from "../../components";
 import styles from "./Home.module.css";
 import logo from "../../assets/logo.png";
 
 const Home = () => {
-  const { width, resizeWidth } = useContext(AuthContext);
+  const { width, resizeWidth } = useContext(LayoutContext);
 
   useEffect(() => {
     window.addEventListener("resize", resizeWidth);
   });
-  console.log();
 
   useEffect(() => {
     window.removeEventListener("resize", null);
