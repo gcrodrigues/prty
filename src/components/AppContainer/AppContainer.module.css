@@ -9,6 +9,7 @@
     "drawer main main main main"
     "drawer main main main main"
     "drawer main main main main";
+  position: relative;
 }
 
 @media (max-width: 700px) {
