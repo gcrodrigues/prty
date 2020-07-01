@@ -4,4 +4,6 @@ export { default as Navbar } from "./Navbar/Navbar";
 export { default as SignButtons } from "./SignButtons/SignButtons";
 export { default as EventList } from "./EventList/EventList";
 export { default as EventCard } from "./EventCard/EventCard";
+export { default as Evento } from "./Evento/Evento";
+export { default as Modal } from "./Modal/Modal";
 export { default as AppContainer } from "./AppContainer/AppContainer";
