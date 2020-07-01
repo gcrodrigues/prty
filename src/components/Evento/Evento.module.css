@@ -1,0 +1,107 @@
+.container {
+  width: 50%;
+  max-width: 550px;
+  min-width: 300px;
+  min-height: 350px;
+  max-height: 500px;
+  background-color: #2a2e35;
+  border-radius: 8px;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.5);
+  border-top: 5px solid #f2726f;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.close {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  top: -15px;
+  right: -10px;
+  background-color: #f2726f;
+  border: 0;
+  border-radius: 50%;
+  padding: 5px;
+}
+
+.title {
+  font-size: 2rem;
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+.container span {
+  color: #b9bbbe;
+  font-size: 0.8rem;
+  line-height: 1rem;
+  font-weight: 600;
+  margin-top: 15px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+}
+
+.input {
+  height: 40px;
+  padding: 20px 10px;
+  border-radius: 3px;
+  border: 2px solid rgb(40, 39, 44);
+  background-color: #12181b;
+  color: #f6f6f6;
+  margin-top: 8px;
+  transition: border 0.3s ease;
+  font-size: 1rem;
+}
+
+.input:focus {
+  border-color: #f2726f;
+}
+
+.dualInput {
+  display: flex;
+  justify-content: space-between;
+}
+
+.inputWrapper {
+  display: flex;
+  flex-direction: column;
+  width: 48%;
+}
+
+.submit {
+  background-color: #2dbf64;
+  padding: 10px 15px;
+  margin-top: 15px;
+  border: 0;
+  border-radius: 3px;
+  font-size: 1.1rem;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+.buttons {
+  margin-top: 15px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.button {
+  width: 48%;
+  padding: 8px 15px;
+  outline: 0;
+  border: 0;
+  border-radius: 3px;
+}
+
+.edit {
+  background-color: #3890c2;
+}
+
+.trash {
+  background-color: #db4e32;
+}
