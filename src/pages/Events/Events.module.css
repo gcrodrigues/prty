@@ -5,5 +5,9 @@
   flex-direction: column;
 
   width: 100%;
-  padding: 40px;
+  padding: 30px 40px;
+}
+
+.overflowHidden {
+  overflow-y: hidden;
 }
