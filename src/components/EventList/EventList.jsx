@@ -1,67 +1,50 @@
-import React from "react";
-import { EventCard } from "../";
+import React, { useEffect, useContext } from "react";
+import { EventCard, Modal } from "../";
+import LayoutContext from "../../contexts/layout";
 
 import styles from "./EventList.module.css";
 
 const EventList = ({ isOffline, isFavorite }) => {
-  const eventos = [
-    {
-      title: "Quermesse",
-      address: "Rua São Jorge 248",
-      date: "19/06/2020",
-    },
-    {
-      title: "Bailão",
-      address: "Rua São Jorge 248",
-      date: "19/06/2020",
-    },
-    {
-      title: "Role",
-      address: "Rua São Jorge 248",
-      date: "19/06/2020",
-    },
-    {
-      title: "Role",
-      address: "Rua São Jorge 248",
-      date: "19/06/2020",
-    },
-    {
-      title: "Role",
-      address: "Rua São Jorge 248",
-      date: "19/06/2020",
-    },
-    {
-      title: "Role",
-      address: "Rua São Jorge 248",
-      date: "19/06/2020",
-    },
-  ];
+  const { modalIsOpen, handleOpenModal, eventos, fetchEventos } = useContext(
+    LayoutContext
+  );
+
+  useEffect(() => {
+    fetchEventos();
+    //eslint-disable-next-line
+  }, [eventos]);
 
   return (
     <div className={styles.cardList}>
+      {modalIsOpen && !isOffline ? <Modal /> : ""}
       {isOffline
         ? eventos.map((evento) => (
             <EventCard
-              title={evento.title}
-              address={evento.address}
-              date={evento.date}
+              key={evento.id}
+              title={evento.nome}
+              address={evento.local}
+              date={evento.data}
               isOffline
             />
           ))
         : isFavorite
         ? eventos.map((evento) => (
             <EventCard
-              title={evento.title}
-              address={evento.address}
-              date={evento.date}
+              key={evento.id}
+              title={evento.nome}
+              address={evento.local}
+              date={evento.data}
               isPrivate
             />
           ))
-        : eventos.map((evento) => (
+        : eventos.map((evento, index) => (
             <EventCard
-              title={evento.title}
-              address={evento.address}
-              date={evento.date}
+              pos={index}
+              key={evento.id}
+              title={evento.nome}
+              address={evento.local}
+              date={evento.data}
+              handleOpenModal={handleOpenModal}
             />
           ))}
     </div>
