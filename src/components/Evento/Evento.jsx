@@ -11,7 +11,7 @@ function Evento() {
   const [descricao, setDescricao] = useState(currentEvento.descricao);
   const [local, setLocal] = useState(currentEvento.local);
   const [data, setData] = useState(currentEvento.data);
-  const [valor, setValor] = useState(currentEvento.valor);
+  const [valor, setValor] = useState(currentEvento.valor.toFixed(2));
   const [disabled, setDisabled] = useState(true);
 
   function handleDisabledInput() {
@@ -78,7 +78,7 @@ function Evento() {
             <input
               className={styles.input}
               type="number"
-              value={valor.toFixed(2)}
+              value={valor}
               onChange={(e) => setValor(e.target.value)}
               disabled={disabled}
             />
