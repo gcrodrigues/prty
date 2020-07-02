@@ -1,6 +1,6 @@
 .container {
   height: 100%;
-  min-height: 580px;
+  min-height: 650px;
   display: flex;
   justify-content: flex-end;
 }

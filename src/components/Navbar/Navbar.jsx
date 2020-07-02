@@ -4,10 +4,12 @@ import cn from "classnames";
 
 import { SignButtons } from "../../components";
 import LayoutContext from "../../contexts/layout";
+import AuthContext from "../../contexts/auth";
 import styles from "./Navbar.module.css";
 
 const Navbar = ({ logo }) => {
   const { isOpen, width, resizeWidth } = useContext(LayoutContext);
+  const { user } = useContext(AuthContext);
 
   useEffect(() => {
     window.addEventListener("resize", resizeWidth);
@@ -26,7 +28,7 @@ const Navbar = ({ logo }) => {
       {!logo && (
         <>
           <FaBars onClick={isOpen} size={22} color="#fff" />
-          <p>Olá, Gustavo</p>
+          <p>Olá, {user}</p>
         </>
       )}
     </div>

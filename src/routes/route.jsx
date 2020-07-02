@@ -11,7 +11,9 @@ export default function RouteWrapper({
   const { signed } = useContext(AuthContext);
   return signed && !isPrivate ? (
     <Redirect to="/myevents" />
-  ) : !signed && isPrivate ? (
+  ) : localStorage.getItem("user") && !isPrivate ? (
+    <Redirect to="/myevents" />
+  ) : !localStorage.getItem("user") && isPrivate ? (
     <Redirect to="/login" />
   ) : (
     <Route component={Component} {...rest} />
