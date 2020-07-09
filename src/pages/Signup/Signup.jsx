@@ -12,7 +12,7 @@ const Signup = () => {
 
   useEffect(() => {
     window.addEventListener("resize", resizeWidth);
-  }, []);
+  }, [resizeWidth]);
 
   useEffect(() => {
     window.removeEventListener("resize", null);

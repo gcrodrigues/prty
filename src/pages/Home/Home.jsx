@@ -11,7 +11,7 @@ const Home = () => {
 
   useEffect(() => {
     window.addEventListener("resize", resizeWidth);
-  }, []);
+  }, [resizeWidth]);
 
   useEffect(() => {
     window.removeEventListener("resize", null);

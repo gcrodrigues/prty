@@ -5,7 +5,6 @@ import {
   FaCog,
   FaTimes,
   FaSearch,
-  FaStar,
   FaSignOutAlt,
 } from "react-icons/fa";
 import { NavLink } from "react-router-dom";

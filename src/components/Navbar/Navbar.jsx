@@ -10,7 +10,7 @@ const Navbar = ({ logo }) => {
   const { isOpen, width, resizeWidth } = useContext(LayoutContext);
   useEffect(() => {
     window.addEventListener("resize", resizeWidth);
-  }, []);
+  }, [resizeWidth]);
 
   return (
     <div
