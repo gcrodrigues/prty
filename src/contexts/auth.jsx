@@ -21,6 +21,7 @@ export const AuthProvider = ({ children }) => {
         localStorage.setItem("email", res.data.email);
         localStorage.setItem("id", res.data.id);
         localStorage.setItem("token", res.data.token);
+        history.push("myevents");
       })
       .catch((err) => console.log(err));
   }

@@ -10,7 +10,7 @@ export default function RouteWrapper({
 }) {
   // const { signed } = useContext(AuthContext);
   const token = localStorage.getItem("token");
-  return !!token && !isPrivate ? (
+  return token && !isPrivate ? (
     <Redirect to="/myevents" />
   ) : token && !isPrivate ? (
     <Redirect to="/myevents" />
