@@ -3,12 +3,10 @@ import LayoutContext from "../../contexts/layout";
 import { FaTrash, FaPen, FaTimes } from "react-icons/fa";
 import cn from "classnames";
 import api from "../../services/api";
-import AuthContext from "../../contexts/auth";
 
 import styles from "./Evento.module.css";
 
 function Evento() {
-  const { user } = useContext(AuthContext);
   const { currentEvento, handleModal } = useContext(LayoutContext);
   const [descricao, setDescricao] = useState(currentEvento.descricao);
   const [local, setLocal] = useState(currentEvento.local);
@@ -26,7 +24,10 @@ function Evento() {
       "eventos",
       {
         id: currentEvento.id,
-        usuario: user,
+        usuario: {
+          nome: localStorage.getItem("user"),
+          id: Number(localStorage.getItem("id")),
+        },
         nome: currentEvento.nome,
         descricao,
         local,

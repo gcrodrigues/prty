@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 // import AuthContext from "../../contexts/auth";
 import LayoutContext from "../../contexts/layout";
 import { FaTimes } from "react-icons/fa";
-// import api from "../../services/api";
+import api from "../../services/api";
 
 import styles from "./Password.module.css";
 
@@ -11,15 +11,27 @@ function Usuario({ password }) {
   const { handleModal } = useContext(LayoutContext);
   const [pass, setPass] = useState("");
   const [confirmPass, setConfirmPass] = useState("");
-  /* 
+
   async function handleEditUsuario(e) {
     e.preventDefault();
-    await api.put("usuarios", {
-      nome,
-      email,
-      id: Number(localStorage.getItem("id")),
-    });
-  } */
+    if (pass !== confirmPass) {
+      alert("Senhas não correspondem");
+      return;
+    }
+    await api.put(
+      "usuarios",
+      {
+        senha: pass,
+        id: Number(localStorage.getItem("id")),
+      },
+      {
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("token"),
+        },
+      }
+    );
+    handleModal();
+  }
 
   return (
     <div className={styles.container}>
@@ -27,7 +39,7 @@ function Usuario({ password }) {
         <FaTimes size={20} />
       </button>
       <h1 className={styles.formTitle}>Troque sua senha</h1>
-      <form onSubmit={() => {}} className={styles.form}>
+      <form onSubmit={handleEditUsuario} className={styles.form}>
         <span>Nova Senha</span>
         <input
           className={styles.input}

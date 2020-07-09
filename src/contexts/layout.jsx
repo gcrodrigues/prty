@@ -9,6 +9,7 @@ export const LayoutProvider = ({ children }) => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [currentEvento, setCurrentEvento] = useState({});
   const [eventos, setEventos] = useState([]);
+  const [eventosFiltrados, setEventosFiltrados] = useState([]);
 
   async function fetchEventos() {
     await api
@@ -20,6 +21,12 @@ export const LayoutProvider = ({ children }) => {
       .then((response) => {
         setEventos(response.data);
       });
+  }
+
+  async function fetchEventosFiltrados() {
+    await api
+      .get(`eventos/usuario/${Number(localStorage.getItem("id"))}`)
+      .then((response) => setEventosFiltrados(response.data));
   }
 
   function isOpen() {
@@ -46,8 +53,10 @@ export const LayoutProvider = ({ children }) => {
         setCurrentEvento,
         currentEvento,
         eventos,
+        eventosFiltrados,
         setEventos,
         fetchEventos,
+        fetchEventosFiltrados,
       }}
     >
       {children}

@@ -10,62 +10,70 @@ const EventList = ({ isOffline, isFavorite }) => {
     modalIsOpen,
     handleModal,
     setCurrentEvento,
+    eventosFiltrados,
     eventos,
     fetchEventos,
+    fetchEventosFiltrados,
   } = useContext(LayoutContext);
 
   useEffect(() => {
     fetchEventos();
-  }, [fetchEventos]);
+    //eslint-disable-next-line
+  }, [eventos]);
+
+  useEffect(() => {
+    fetchEventosFiltrados();
+    //eslint-disable-next-line
+  }, [eventosFiltrados]);
 
   function handleEventInfo(pos) {
     handleModal();
-    const filteredEvents = eventos.filter(
-      (evento) => evento.usuario.id === Number(localStorage.getItem("id"))
-    );
-    setCurrentEvento(filteredEvents[pos]);
+    setCurrentEvento(eventosFiltrados[pos]);
   }
   return (
     <div className={styles.cardList}>
-      {modalIsOpen && !isOffline && <Modal event />}
-      {isOffline
-        ? eventos.map((evento) => (
-            <EventCard
-              key={evento.id}
-              title={evento.nome}
-              address={evento.local}
-              date={evento.data}
-              usuario={evento.usuario.nome}
-              description={evento.descricao}
-              value={evento.valor}
-              isOffline
-            />
-          ))
-        : /* isFavorite
-        ? eventos.map((evento) => (
-            <EventCard
-              key={evento.id}
-              title={evento.nome}
-              address={evento.local}
-              date={evento.data}
-              isPrivate
-            />
-          ))
-        : */ eventos
-            .filter(
-              (evento) =>
-                evento.usuario.id === Number(localStorage.getItem("id"))
-            )
-            .map((evento, index) => (
-              <EventCard
-                pos={index}
-                key={evento.id}
-                title={evento.nome}
-                address={evento.local}
-                date={evento.data}
-                handleEventInfo={handleEventInfo}
-              />
-            ))}
+      {eventos.length === 0 ? (
+        <div className={styles.emptyContainer}>
+          <h1 className={styles.empty}>Nenhum evento encontrado</h1>
+        </div>
+      ) : (
+        <>
+          {modalIsOpen && !isOffline ? <Modal event /> : ""}
+          {isOffline
+            ? eventos.map((evento) => (
+                <EventCard
+                  key={evento.id}
+                  title={evento.nome}
+                  address={evento.local}
+                  date={evento.data}
+                  usuario={evento.usuario.nome}
+                  description={evento.descricao}
+                  value={evento.valor}
+                  isOffline
+                />
+              ))
+            : isFavorite
+            ? eventos.map((evento) => (
+                <EventCard
+                  key={evento.id}
+                  title={evento.nome}
+                  address={evento.local}
+                  date={evento.data}
+                  isPrivate
+                />
+              ))
+            : eventosFiltrados.map((evento, index) => (
+                <EventCard
+                  pos={index}
+                  key={evento.id}
+                  title={evento.nome}
+                  address={evento.local}
+                  date={evento.data}
+                  handleEventInfo={handleEventInfo}
+                />
+              ))}
+        </>
+      )}
     </div>
   );
 };

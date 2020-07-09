@@ -1,18 +1,36 @@
-import React, { useContext } from "react";
+import React, { useState, useContext } from "react";
 import { AppContainer, Modal } from "../../components";
-import { FaUserCircle, FaPen, FaTrash, FaKey } from "react-icons/fa";
+import { useHistory } from "react-router-dom";
+import { FaUserCircle, FaPen, FaTrash } from "react-icons/fa";
 import cn from "classnames";
 import LayoutContext from "../../contexts/layout";
 import api from "../../services/api";
 
 import styles from "./Settings.module.css";
+import { useEffect } from "react";
 
 const Settings = () => {
+  const history = useHistory();
   const { modalIsOpen, handleModal } = useContext(LayoutContext);
+  const [usuario, setUsuario] = useState({});
+
+  useEffect(() => {
+    handleUsuario();
+  }, []);
+
+  async function handleUsuario() {
+    await api
+      .get(`usuarios/${Number(localStorage.getItem("id"))}`, {
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("token"),
+        },
+      })
+      .then((res) => setUsuario(res.data));
+  }
 
   async function handleDeleteUser() {
     await api
-      .delete(`usuarios/${Number(localStorage.getItem("id"))}`, {
+      .delete(`usuarios/${usuario.id}`, {
         headers: {
           Authorization: "Bearer " + localStorage.getItem("token"),
         },
@@ -23,6 +41,7 @@ const Settings = () => {
         localStorage.removeItem("user");
         localStorage.removeItem("email");
         localStorage.removeItem("token");
+        history.push("/");
       })
       .catch((err) => alert("Não foi possível deletar o usuário"));
   }
@@ -45,12 +64,7 @@ const Settings = () => {
           >
             <FaPen size={20} /> Editar conta
           </button>
-          <button
-            className={cn(styles.button, styles.edit)}
-            onClick={handleModal}
-          >
-            <FaKey size={20} /> Trocar senha
-          </button>
+
           <button
             className={cn(styles.button, styles.delete)}
             onClick={handleDeleteUser}

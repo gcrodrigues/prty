@@ -6,7 +6,7 @@ import api from "../../services/api";
 
 import styles from "./Usuario.module.css";
 
-function Usuario({ password }) {
+function Usuario() {
   // const { user } = useContext(AuthContext);
   const { handleModal } = useContext(LayoutContext);
   const [nome, setNome] = useState(localStorage.getItem("user"));
@@ -27,6 +27,10 @@ function Usuario({ password }) {
         },
       }
     );
+
+    localStorage.setItem("email", email);
+    localStorage.setItem("user", nome);
+    handleModal();
   }
 
   return (

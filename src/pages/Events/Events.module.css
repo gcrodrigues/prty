@@ -1,7 +1,6 @@
 .main {
   display: flex;
   grid-area: main;
-
   flex-direction: column;
 
   width: 100%;
