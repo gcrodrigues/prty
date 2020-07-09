@@ -6,9 +6,11 @@ import {
   FaTimes,
   FaSearch,
   FaStar,
+  FaSignOutAlt,
 } from "react-icons/fa";
 import { NavLink } from "react-router-dom";
 import LayoutContext from "../../contexts/layout";
+import AuthContext from "../../contexts/auth";
 
 import cn from "classnames";
 import styles from "./Drawer.module.css";
@@ -16,6 +18,7 @@ import logo from "../../assets/logo.png";
 
 const Drawer = () => {
   const { open, isOpen } = useContext(LayoutContext);
+  const { signOut } = useContext(AuthContext);
 
   return (
     <div
@@ -58,7 +61,7 @@ const Drawer = () => {
             <FaSearch size={22} color="#fff" /> Buscar Eventos
           </li>
         </NavLink>
-        <NavLink
+        {/* <NavLink
           activeClassName={styles.active}
           className={styles.opcaoLink}
           to="/favorites"
@@ -66,7 +69,7 @@ const Drawer = () => {
           <li>
             <FaStar size={22} color="#fff" /> Favoritos
           </li>
-        </NavLink>
+        </NavLink> */}
         <NavLink
           activeClassName={styles.active}
           className={styles.opcaoLink}
@@ -77,6 +80,9 @@ const Drawer = () => {
           </li>
         </NavLink>
       </ul>
+      <button className={styles.logOut} onClick={signOut}>
+        <FaSignOutAlt size={22} /> Sair
+      </button>
     </div>
   );
 };

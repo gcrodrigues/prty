@@ -13,12 +13,24 @@
   transform: translateY(-2px);
 }
 
-.title {
-  margin-bottom: 15px;
+.user {
+  margin: 4px 0 10px;
+  color: #909091;
 }
 
-.addres,
+.description {
+  margin-top: 10px;
+}
+.address {
+  margin-top: 10px;
+}
+.value {
+  float: right;
+  font-size: 1.2rem;
+}
+
 .date {
+  float: left;
   margin-top: 10px;
 }
 

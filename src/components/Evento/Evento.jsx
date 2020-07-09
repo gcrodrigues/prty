@@ -3,11 +3,13 @@ import LayoutContext from "../../contexts/layout";
 import { FaTrash, FaPen, FaTimes } from "react-icons/fa";
 import cn from "classnames";
 import api from "../../services/api";
+import AuthContext from "../../contexts/auth";
 
 import styles from "./Evento.module.css";
 
 function Evento() {
-  const { currentEvento, handleCloseModal } = useContext(LayoutContext);
+  const { user } = useContext(AuthContext);
+  const { currentEvento, handleModal } = useContext(LayoutContext);
   const [descricao, setDescricao] = useState(currentEvento.descricao);
   const [local, setLocal] = useState(currentEvento.local);
   const [data, setData] = useState(currentEvento.data);
@@ -20,25 +22,36 @@ function Evento() {
 
   async function handleEditEvent(e) {
     e.preventDefault();
-    await api.put("eventos", {
-      id: currentEvento.id,
-      nome: currentEvento.nome,
-      descricao,
-      local,
-      data,
-      valor,
-    });
+    await api.put(
+      "eventos",
+      {
+        id: currentEvento.id,
+        usuario: user,
+        nome: currentEvento.nome,
+        descricao,
+        local,
+        data,
+        valor,
+      },
+      {
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("token"),
+        },
+      }
+    );
 
-    handleCloseModal();
+    handleModal();
   }
   async function handleDeleteEvent() {
-    await api.delete(`eventos/${currentEvento.id}`);
-    handleCloseModal();
+    await api.delete(`eventos/${currentEvento.id}`, {
+      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+    });
+    handleModal();
   }
 
   return (
     <div className={styles.container}>
-      <button className={styles.close} onClick={handleCloseModal}>
+      <button className={styles.close} onClick={handleModal}>
         <FaTimes size={20} />
       </button>
       <h2 className={styles.title}>{currentEvento.nome}</h2>
@@ -51,6 +64,7 @@ function Evento() {
           value={descricao}
           onChange={(e) => setDescricao(e.target.value)}
           disabled={disabled}
+          required
         />
 
         <span>Local</span>
@@ -60,6 +74,7 @@ function Evento() {
           value={local}
           onChange={(e) => setLocal(e.target.value)}
           disabled={disabled}
+          required
         />
 
         <div className={styles.dualInput}>
@@ -71,6 +86,7 @@ function Evento() {
               value={data}
               onChange={(e) => setData(e.target.value)}
               disabled={disabled}
+              required
             />
           </div>
           <div className={styles.inputWrapper}>
@@ -81,6 +97,7 @@ function Evento() {
               value={valor}
               onChange={(e) => setValor(e.target.value)}
               disabled={disabled}
+              required
             />
           </div>
         </div>

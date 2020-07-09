@@ -1,32 +1,24 @@
-import React, { useContext } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import { Route, Redirect } from "react-router-dom";
-import AuthContext from "../contexts/auth";
+// import AuthContext from "../contexts/auth";
 
 export default function RouteWrapper({
   component: Component,
   isPrivate,
   ...rest
 }) {
-  const { signed } = useContext(AuthContext);
-  return signed && !isPrivate ? (
+  // const { signed } = useContext(AuthContext);
+  const token = localStorage.getItem("token");
+  return !!token && !isPrivate ? (
     <Redirect to="/myevents" />
-  ) : localStorage.getItem("user") && !isPrivate ? (
+  ) : token && !isPrivate ? (
     <Redirect to="/myevents" />
-  ) : !localStorage.getItem("user") && isPrivate ? (
+  ) : !token && isPrivate ? (
     <Redirect to="/login" />
   ) : (
     <Route component={Component} {...rest} />
   );
-
-  /* if (!signed && isPrivate) {
-    return <Redirect to="/login" />;
-  }
-
-  if (signed && !isPrivate) {
-    return <Redirect to="/dashboard" />;
-  } */
-  // return <Route component={Component} {...rest} />;
 }
 
 RouteWrapper.propTypes = {

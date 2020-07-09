@@ -10,10 +10,16 @@ export const LayoutProvider = ({ children }) => {
   const [currentEvento, setCurrentEvento] = useState({});
   const [eventos, setEventos] = useState([]);
 
-  function fetchEventos() {
-    api.get("eventos").then((response) => {
-      setEventos(response.data);
-    });
+  async function fetchEventos() {
+    await api
+      .get("eventos", {
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("token"),
+        },
+      })
+      .then((response) => {
+        setEventos(response.data);
+      });
   }
 
   function isOpen() {
@@ -24,13 +30,8 @@ export const LayoutProvider = ({ children }) => {
     setWidth(window.innerWidth);
   }
 
-  function handleOpenModal(pos) {
-    setModalIsOpen(true);
-    setCurrentEvento(eventos[pos]);
-  }
-
-  function handleCloseModal() {
-    setModalIsOpen(false);
+  function handleModal() {
+    setModalIsOpen(!modalIsOpen);
   }
 
   return (
@@ -41,10 +42,11 @@ export const LayoutProvider = ({ children }) => {
         resizeWidth,
         width,
         modalIsOpen,
-        handleCloseModal,
-        handleOpenModal,
+        handleModal,
+        setCurrentEvento,
         currentEvento,
         eventos,
+        setEventos,
         fetchEventos,
       }}
     >

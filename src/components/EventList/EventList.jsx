@@ -1,22 +1,33 @@
 import React, { useEffect, useContext } from "react";
 import { EventCard, Modal } from "../";
 import LayoutContext from "../../contexts/layout";
+// import AuthContext from "../../contexts/auth";
 
 import styles from "./EventList.module.css";
 
 const EventList = ({ isOffline, isFavorite }) => {
-  const { modalIsOpen, handleOpenModal, eventos, fetchEventos } = useContext(
-    LayoutContext
-  );
+  const {
+    modalIsOpen,
+    handleModal,
+    setCurrentEvento,
+    eventos,
+    fetchEventos,
+  } = useContext(LayoutContext);
 
   useEffect(() => {
     fetchEventos();
-    //eslint-disable-next-line
-  }, [eventos]);
+  }, [fetchEventos]);
 
+  function handleEventInfo(pos) {
+    handleModal();
+    const filteredEvents = eventos.filter(
+      (evento) => evento.usuario.id === Number(localStorage.getItem("id"))
+    );
+    setCurrentEvento(filteredEvents[pos]);
+  }
   return (
     <div className={styles.cardList}>
-      {modalIsOpen && !isOffline ? <Modal /> : ""}
+      {modalIsOpen && !isOffline && <Modal event />}
       {isOffline
         ? eventos.map((evento) => (
             <EventCard
@@ -24,10 +35,13 @@ const EventList = ({ isOffline, isFavorite }) => {
               title={evento.nome}
               address={evento.local}
               date={evento.data}
+              usuario={evento.usuario.nome}
+              description={evento.descricao}
+              value={evento.valor}
               isOffline
             />
           ))
-        : isFavorite
+        : /* isFavorite
         ? eventos.map((evento) => (
             <EventCard
               key={evento.id}
@@ -37,16 +51,21 @@ const EventList = ({ isOffline, isFavorite }) => {
               isPrivate
             />
           ))
-        : eventos.map((evento, index) => (
-            <EventCard
-              pos={index}
-              key={evento.id}
-              title={evento.nome}
-              address={evento.local}
-              date={evento.data}
-              handleOpenModal={handleOpenModal}
-            />
-          ))}
+        : */ eventos
+            .filter(
+              (evento) =>
+                evento.usuario.id === Number(localStorage.getItem("id"))
+            )
+            .map((evento, index) => (
+              <EventCard
+                pos={index}
+                key={evento.id}
+                title={evento.nome}
+                address={evento.local}
+                date={evento.data}
+                handleEventInfo={handleEventInfo}
+              />
+            ))}
     </div>
   );
 };

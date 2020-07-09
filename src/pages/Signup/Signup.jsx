@@ -1,6 +1,7 @@
 import React, { useEffect, useContext } from "react";
 import cn from "classnames";
 import LayoutContext from "../../contexts/layout";
+import { Link } from "react-router-dom";
 
 import { SignForm } from "../../components";
 import styles from "./Signup.module.css";
@@ -11,7 +12,7 @@ const Signup = () => {
 
   useEffect(() => {
     window.addEventListener("resize", resizeWidth);
-  });
+  }, []);
 
   useEffect(() => {
     window.removeEventListener("resize", null);
@@ -29,7 +30,9 @@ const Signup = () => {
           width < 1000 ? styles.loginMobileContainer : styles.loginContainer
         }
       >
-        <img className={styles.logo} src={logo} alt="logo" />
+        <Link to="/">
+          <img className={styles.logo} src={logo} alt="logo" />
+        </Link>
         <SignForm cadastro />
       </div>
     </div>

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import api from "../../services/api";
 import { useHistory } from "react-router-dom";
+// import AuthContext from "../../contexts/auth";
 
 import { AppContainer } from "../../components";
 import styles from "./Dashboard.module.css";
@@ -12,18 +13,38 @@ const Dashboard = () => {
   const [valor, setValor] = useState(0);
   const [data, setData] = useState("");
   const [descricao, setDescricao] = useState("");
+  // const { user } = useContext(AuthContext);
+
+  const date = new Date();
+  const currentDate =
+    date.getFullYear() +
+    "-" +
+    ("0" + (date.getMonth() + 1)).slice(-2) +
+    "-" +
+    ("0" + date.getDate()).slice(-2);
 
   async function handleSubmit(e) {
     e.preventDefault();
 
-    await api.post("/eventos", {
-      nome: eventName,
-      local: local,
-      valor: valor,
-      descricao: descricao,
-      data: data,
-      usuario: null,
-    });
+    await api.post(
+      "/eventos",
+      {
+        nome: eventName,
+        local: local,
+        valor: valor,
+        descricao: descricao,
+        data: data,
+        usuario: {
+          nome: localStorage.getItem("user"),
+          id: Number(localStorage.getItem("id")),
+        },
+      },
+      {
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("token"),
+        },
+      }
+    );
 
     history.push("/myevents");
   }
@@ -55,6 +76,7 @@ const Dashboard = () => {
                 <input
                   type="date"
                   name="date"
+                  min={currentDate}
                   id="date"
                   onChange={(e) => setData(e.target.value)}
                 />

@@ -1,49 +1,36 @@
 .container {
-  width: 50%;
-  max-width: 550px;
+  border-top: 5px solid #f2726f;
+  width: 30%;
+  max-width: 500px;
   min-width: 300px;
-  min-height: 350px;
-  max-height: 500px;
   background-color: #2a2e35;
   border-radius: 8px;
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.5);
-  border-top: 5px solid #f2726f;
   padding: 30px;
   display: flex;
   flex-direction: column;
   position: relative;
-  animation: fadein 2s ease-in-out;
+  animation: fadein 1.5s ease-in-out;
 }
 
-.close {
-  position: absolute;
+.form {
   display: flex;
-  align-items: center;
-  top: -15px;
-  right: -10px;
-  background-color: #f2726f;
-  border: 0;
-  border-radius: 50%;
-  padding: 5px;
+  justify-content: center;
+  flex-direction: column;
 }
 
-.title {
+.formTitle {
   font-size: 2rem;
   text-align: center;
   margin-bottom: 15px;
 }
 
-.container span {
+.form span {
   color: #b9bbbe;
   font-size: 0.8rem;
   line-height: 1rem;
   font-weight: 600;
   margin-top: 15px;
-}
-
-.form {
-  display: flex;
-  flex-direction: column;
 }
 
 .input {
@@ -56,21 +43,6 @@
   margin-top: 8px;
   transition: border 0.3s ease;
   font-size: 1rem;
-}
-
-.input:focus {
-  border-color: #f2726f;
-}
-
-.dualInput {
-  display: flex;
-  justify-content: space-between;
-}
-
-.inputWrapper {
-  display: flex;
-  flex-direction: column;
-  width: 48%;
 }
 
 .submit {
@@ -93,38 +65,6 @@
   box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0);
 }
 
-.buttons {
-  margin-top: 15px;
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-}
-
-.button {
-  width: 48%;
-  padding: 8px 15px;
-  outline: 0;
-  border: 0;
-  border-radius: 3px;
-  transition: all 0.15s linear;
-}
-
-.edit {
-  background-color: #3890c2;
-}
-
-.edit:hover {
-  background-color: #3890c2c4;
-}
-
-.trash {
-  background-color: #db4e32;
-}
-
-.trash:hover {
-  background-color: #db4e32c4;
-}
-
 @keyframes fadein {
   0% {
     opacity: 0;
@@ -138,4 +78,16 @@
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+.close {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  top: -15px;
+  right: -10px;
+  background-color: #f2726f;
+  border: 0;
+  border-radius: 50%;
+  padding: 5px;
 }

@@ -11,7 +11,6 @@ import {
   AllEvents,
   Dashboard,
   Settings,
-  Favorites,
   Search,
 } from "../pages";
 
@@ -26,7 +25,7 @@ const Routes = () => {
       <Route path="/create" component={Dashboard} isPrivate />
       <Route path="/myevents" component={Events} isPrivate />
       <Route path="/settings" component={Settings} isPrivate />
-      <Route path="/favorites" component={Favorites} isPrivate />
+      {/* <Route path="/favorites" component={Favorites} isPrivate /> */}
       <Route path="/search" component={Search} isPrivate />
 
       <Route path="/" component={() => <h1>404 - Not Found</h1>} />

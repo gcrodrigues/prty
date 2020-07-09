@@ -9,8 +9,11 @@ const EventCard = ({
   title,
   address,
   date,
+  description,
+  value,
+  usuario,
   isFavorite,
-  handleOpenModal,
+  handleEventInfo,
   isOffline,
 }) => {
   return (
@@ -26,7 +29,7 @@ const EventCard = ({
           <>
             <button
               className={styles.moreInfo}
-              onClick={() => handleOpenModal(pos)}
+              onClick={() => handleEventInfo(pos)}
             >
               <FiMoreHorizontal size={20} color="#fff" />
             </button>
@@ -34,10 +37,22 @@ const EventCard = ({
         )}
       </div>
       <h2 className={styles.title}>{title}</h2>
-      <p className={styles.address}>{address}</p>
+      {isOffline && <p className={styles.user}>Criado por: {usuario}</p>}
+      <p className={styles.address}>
+        <strong>Local:</strong>
+        {address}
+      </p>
+      {isOffline && (
+        <p className={styles.description}>
+          <strong>Descrição:</strong>
+          {description}
+        </p>
+      )}
+
       <p className={styles.date}>
         <strong>Data:</strong> {date}
       </p>
+      {isOffline && <p className={styles.value}>R$ {value},00</p>}
     </div>
   );
 };

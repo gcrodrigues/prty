@@ -8,4 +8,16 @@
   align-items: center;
   background-color: rgba(0, 0, 0, 0.6);
   z-index: 2;
+  transform-origin: 50% 50%;
+  animation: fadein 0.7s ease-in-out;
+}
+
+@keyframes fadein {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
 }
